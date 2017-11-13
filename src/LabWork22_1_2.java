@@ -82,18 +82,15 @@ public class LabWork22_1_2 {
     public static void main(String... args) {
         Matrix matrix = new Matrix();
 
-        int[][] matrix1 = {{1, 2},
-                           {3, 4}};
+        int[][] matrix1 = {{1, 2, 3},
+                           {3, 4, 9}};
         int[][] matrix2 = {{5, 6},
-                           {7, 8}};
-
-//        int[][] matrix2 = {};
-
-//        int[][] matrix2 = {{5, 6},
-//                           {7, 8, 6}};
+                           {5, 1},
+                           {1, 2}};
 
 //        int[][] matrix2 = {{5, 6},
-//                           {7, 8},
+//                           {7, 6}};
+//        int[][] matrix2 = {{5, 6},
 //                           {9, 0}};
 
         matrix.addMatrices(matrix1, matrix2);
