@@ -3,7 +3,7 @@ class MyCalc {
         double pi = 0;
         int divisor = 1;
         if (numberOfTerms < 0) {
-            numberOfTerms = -numberOfTerms;
+            numberOfTerms -= numberOfTerms;
         }
         for (int i = 1; i <= numberOfTerms; i++) {
             if (i % 2 != 0) {

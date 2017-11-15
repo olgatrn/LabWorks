@@ -2,6 +2,7 @@ class MyPyramid {
     public static void printPyramid(int height) {
         if (height < 1 | height > 9) {
             System.out.println("We need another height!");
+            return;
         }
         String space = " ";
         for (int numberOfLine = 1; numberOfLine <= height; numberOfLine++) {

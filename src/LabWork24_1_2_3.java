@@ -1,5 +1,5 @@
 class MyMath {
-    final static double PI = 3.14;
+    private final static double PI = 3.14;
 
     public static double areaOfCircle(double radius) {
         double areaOfCircle = PI * radius * radius;
