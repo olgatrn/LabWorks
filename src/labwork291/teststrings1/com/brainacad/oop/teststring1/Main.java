@@ -12,9 +12,11 @@ public class Main {
     }
 
     public static String reverseString(String stringToReverse) {
+        return new StringBuilder(stringToReverse).reverse().toString();
 
-        StringBuilder stringBuilder = new StringBuilder(stringToReverse);
-        String reversedString = stringBuilder.reverse().toString();
-        return reversedString;
+//        old code
+//        StringBuilder stringBuilder = new StringBuilder(stringToReverse);
+//        String reversedString = stringBuilder.reverse().toString();
+//        return reversedString;
     }
 }
