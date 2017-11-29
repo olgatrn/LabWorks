@@ -7,7 +7,7 @@ public class Triangle extends Shape implements Comparable {
     private double b;
     private double c;
 
-    public Triangle(){
+    public Triangle() {
         this.a = 1;
         this.b = 1;
         this.c = 1;
@@ -54,5 +54,15 @@ public class Triangle extends Shape implements Comparable {
         }
 
         return 0;
+    }
+
+    public static Triangle parseTriangle(String string) {
+        String[] arrayOfProperties = string.split(":");
+        String[] arrayOfTriangleDimensions = arrayOfProperties[2].split(",");
+        Triangle triangle = new Triangle(arrayOfProperties[1],
+                Double.parseDouble(arrayOfTriangleDimensions[0]),
+                Double.parseDouble(arrayOfTriangleDimensions[1]),
+                Double.parseDouble(arrayOfTriangleDimensions[2]));
+        return triangle;
     }
 }

@@ -5,7 +5,7 @@ import static java.lang.Math.PI;
 public class Circle extends Shape implements Comparable {
     private double radius;
 
-    public Circle () {
+    public Circle() {
         this.color = "black";
         this.radius = 1;
     }
@@ -43,5 +43,12 @@ public class Circle extends Shape implements Comparable {
             return -1;
         }
         return 0;
+    }
+
+    public static Circle parseCircle(String string) {
+        String[] arrayOfProperties = string.split(":");
+        Circle circle = new Circle(arrayOfProperties[1],
+                Double.parseDouble(arrayOfProperties[2]));
+        return circle;
     }
 }

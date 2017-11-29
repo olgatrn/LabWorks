@@ -1,6 +1,7 @@
 package labwork2103;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 import static java.lang.Math.random;
 
@@ -89,10 +90,24 @@ public class Main {
             element.draw();
         }
 
-        //LabWork 2-10-3
+        //LabWork 2-10-3, 2-10-4
         System.out.println(Shape.parseShape("Rectangle:RED:10,20").toString());
         System.out.println(Shape.parseShape("Triangle:GREEN:9,7,12").toString());
         System.out.println(Shape.parseShape("Circle:BLACK:10").toString());
+
+        //LabWork 2-10-5
+        Scanner scanner = new Scanner(System.in);
+        String stringValue = scanner.nextLine();
+        int intValue = Integer.parseInt(stringValue);
+        Shape[] arrayOfShapes = new Shape[intValue];
+        for (int i = 0; i < arrayOfShapes.length; i++) {
+            Scanner scannerForElementsOfArray = new Scanner(System.in);
+            String stringAboutElement = scanner.nextLine();
+            arrayOfShapes[i] = Shape.parseShape(stringAboutElement);
+        }
+        for (Shape element : arrayOfShapes) {
+            element.draw();
+        }
     }
 }
 

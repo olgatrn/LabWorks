@@ -46,4 +46,13 @@ public class Rectangle extends Shape implements Comparable {
         }
         return 0;
     }
+
+    public static Rectangle parseRectangle(String string) {
+        String[] arrayOfProperties = string.split(":");
+        String[] arrayOfRectangleDimensions = arrayOfProperties[2].split(",");
+        Rectangle rectangle = new Rectangle(arrayOfProperties[1],
+                Double.parseDouble(arrayOfRectangleDimensions[0]),
+                Double.parseDouble(arrayOfRectangleDimensions[1]));
+        return rectangle;
+    }
 }
