@@ -51,7 +51,6 @@ public class MyPhoneBook {
     public void printPhoneBook() {
         for (PhoneNumber element : phoneNumbers) {
             System.out.println(element);
-            ;
         }
     }
 

@@ -25,7 +25,7 @@ public class Person {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(int age) throws InvalidAgeException {
         this.age = age;
         if (this.age < 0 | this.age > 120) {
             throw new InvalidAgeException();

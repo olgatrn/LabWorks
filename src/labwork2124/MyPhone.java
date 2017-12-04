@@ -1,13 +1,48 @@
-package labwork2123.com.brainacad.oop;
+package labwork2124;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class MyPhone {
-    public MyPhone() {
+    public static class MemoryCard {
+
     }
 
-    MyPhoneBook myPhoneBook = new MyPhoneBook();
+    public static class SimCard {
+
+    }
+
+    public static class HeadPhones {
+
+    }
+
+    public static class PhoneCharger {
+
+    }
+
+    public static class PhoneBattery {
+
+    }
+
+    public class Camera {
+
+    }
+
+    public class Bluetooth {
+
+    }
+
+    public class PowerOnButton {
+
+    }
+
+    public class PhoneDisplay {
+
+    }
+
+    public class PhoneSpeaker {
+
+    }
 
     public class MyPhoneBook {
         public class PhoneNumber {
@@ -77,9 +112,12 @@ public class MyPhone {
                 }
             });
         }
-
-
     }
+
+    public MyPhone() {
+    }
+
+    MyPhoneBook myPhoneBook = new MyPhoneBook();
 
     public void switchOn() {
         System.out.print("Loading PhoneBook records...");

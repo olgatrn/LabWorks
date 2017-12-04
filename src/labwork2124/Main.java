@@ -1,4 +1,4 @@
-package labwork2123.com.brainacad.oop;
+package labwork2124;
 
 public class Main {
     public static void main(String[] args) {

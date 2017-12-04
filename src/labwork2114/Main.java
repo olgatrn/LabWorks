@@ -20,12 +20,13 @@ public class Main {
         }
         System.out.println("Enter the string for parsing a new shape:");
         String string = new Scanner(System.in).nextLine();
+        Shape shapeFromConsole = null;
         try {
-            Shape shapeFromConsole = Shape.parseShape(string);
+            shapeFromConsole = Shape.parseShape(string);
         } catch (InvalidShapeStringException e) {
             System.out.println("Parsing error, another values needed.");
         }
-        System.out.println();
+        System.out.println(shapeFromConsole);
     }
 }
 
