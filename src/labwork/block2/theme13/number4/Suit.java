@@ -1,4 +1,4 @@
-package labwork2134.com.brainacad.oop.testenum2;
+package labwork.block2.theme13.number4;
 
 public enum Suit {
     SPADE, DIAMOND, CLUB, HEART

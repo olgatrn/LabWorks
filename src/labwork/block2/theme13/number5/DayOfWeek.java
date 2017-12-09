@@ -1,4 +1,4 @@
-package labwork2135.com.brainacad.oop.testenum3;
+package labwork.block2.theme13.number5;
 
 public enum DayOfWeek {
     SUNDAY,
