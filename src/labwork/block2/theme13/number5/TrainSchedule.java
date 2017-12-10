@@ -132,7 +132,7 @@ public class TrainSchedule {
 
     public void printTrains() {
         for (Train train : trains) {
-            System.out.println(train.toString());
+            System.out.println(train);
         }
     }
 
