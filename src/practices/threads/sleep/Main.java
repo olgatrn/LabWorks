@@ -1,12 +1,9 @@
 package practices.threads.sleep;
 
-import practices.threads.runnable.MyTestRunnable;
-
 public class Main {
     public static void main(String[] args) {
         System.out.println("Main method started");
-        MyTestRunnable myTestRunnable = new MyTestRunnable();
-        Thread thread = new Thread(myTestRunnable);
+        Thread thread = new Thread(new MyTestRunnable());
         thread.start();
         System.out.println("Thread started");
         try {
@@ -14,6 +11,7 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println(Thread.currentThread().getName());
         System.out.println("Main method ended");
     }
 }
