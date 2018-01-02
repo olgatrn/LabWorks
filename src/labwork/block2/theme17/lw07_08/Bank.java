@@ -1,4 +1,4 @@
-package labwork.block2.theme17.lw07;
+package labwork.block2.theme17.lw07_08;
 
 public class Bank {
     private int accounts[];
@@ -12,7 +12,11 @@ public class Bank {
         }
     }
 
-    void transfer(int from, int to, int amount) {
+//    public int[] getAccounts() {
+//        return accounts;
+//    }
+
+    synchronized void transfer(int from, int to, int amount) {
         try {
             System.out.println("from: " + from + " to: " + to +
                     " amount: " + amount);
@@ -20,19 +24,19 @@ public class Bank {
             if (accounts[from] < amount) {
                 return;
             }
-            accounts[from] = -amount;
+            accounts[from] -= amount;
             Thread.sleep((int) (100 * Math.random()));
-            accounts[to] = accounts[to] + amount;
+            accounts[to] += amount;
 
-            System.out.println("Total balance: " + totalBalance());
+            System.out.println("Total balance: " + getTotalBalance());
         } catch (InterruptedException e) {
         }
     }
 
-    public int totalBalance() {
+    public int getTotalBalance() {
         int total = 0;
-        for (int v : accounts) {
-            total = total + v;
+        for (int account : accounts) {
+            total += account;
         }
         return total;
     }
