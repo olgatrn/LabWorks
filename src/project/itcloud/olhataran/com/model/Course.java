@@ -8,15 +8,19 @@ public class Course {
     private enum DaysOfWeek {
         SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
     }
-
     private enum Mark {
         A, B, C, D, E
     }
 
-    public class StudentMarkForTask {
-        private Student student;
-        private String task;
-        private Mark mark;
+    private class PerformanceRegister {
+        private class StudentMarkForTask{
+            Student student;
+            Mark mark;
+            String task;
+        }
+
+        private List<StudentMarkForTask> studentMarksForTasks;
+
     }
 
     public static class CourseBuilder {
@@ -82,7 +86,7 @@ public class Course {
     private LocalDate dateOfEnd;
     private Set<DaysOfWeek> daysOfWeek;
     private List<String> tasks;
-    private List<StudentMarkForTask> performanceRegister;
+    private PerformanceRegister performanceRegister;
 
     public Course(CourseBuilder builder) {
         this.id = builder.id;
@@ -132,7 +136,7 @@ public class Course {
         return tasks;
     }
 
-    public List<StudentMarkForTask> getPerformanceRegister() {
+    public PerformanceRegister getPerformanceRegister() {
         return performanceRegister;
     }
 
