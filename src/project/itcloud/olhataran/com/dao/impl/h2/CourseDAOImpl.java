@@ -1,6 +1,6 @@
 package project.itcloud.olhataran.com.dao.impl.h2;
 
-import project.itcloud.olhataran.com.Converter;
+import project.itcloud.olhataran.com.Main;
 import project.itcloud.olhataran.com.dao.CourseDAO;
 import project.itcloud.olhataran.com.model.Course;
 import project.itcloud.olhataran.com.model.Trainer;
@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDAOImpl extends DatabaseConnector implements CourseDAO{
+public class CourseDAOImpl extends DatabaseConnector implements CourseDAO {
 
     public CourseDAOImpl() throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
     }
@@ -29,8 +29,8 @@ public class CourseDAOImpl extends DatabaseConnector implements CourseDAO{
             ps.setString(6, course.getDateOfEnd() != null ?
                     course.getDateOfEnd().format(DateTimeFormatter.ISO_LOCAL_DATE) : null);
             ps.setString(7, course.getDaysOfWeek() != null ?
-                    Converter.convertArrayDayOfWeekToString(course.getDaysOfWeek()) : null);
-            ps.setString(8, Converter.convertListTasksToString(course.getTasks()));
+                    Main.convertArrayDayOfWeekToString(course.getDaysOfWeek()) : null);
+            ps.setString(8, Main.convertListTasksToString(course.getTasks()));
             result = ps.execute();
         }
         return result;
@@ -55,9 +55,9 @@ public class CourseDAOImpl extends DatabaseConnector implements CourseDAO{
                             rs.getString("name"))
                             .shortDescription(rs.getString("short_description"))
                             .trainer(trainer)
-                            .dateOfStart(Converter.convertStringToLocalDate(rs.getString("date_of_start")))
-                            .dateOfEnd(Converter.convertStringToLocalDate(rs.getString("date_of_end")))
-                            .daysOfWeek(Converter.convertStringToArrayDayOfWeek(rs.getString("days_of_week")))
+                            .dateOfStart(Main.convertStringToLocalDate(rs.getString("date_of_start")))
+                            .dateOfEnd(Main.convertStringToLocalDate(rs.getString("date_of_end")))
+                            .daysOfWeek(Main.convertStringToArrayDayOfWeek(rs.getString("days_of_week")))
 //                      TODO
 //                    .tasks
                             .build();
@@ -86,9 +86,9 @@ public class CourseDAOImpl extends DatabaseConnector implements CourseDAO{
                         rs.getString("name"))
                         .shortDescription(rs.getString("short_description"))
                         .trainer(trainer)
-                        .dateOfStart(Converter.convertStringToLocalDate(rs.getString("date_of_start")))
-                        .dateOfEnd(Converter.convertStringToLocalDate(rs.getString("date_of_end")))
-                        .daysOfWeek(Converter.convertStringToArrayDayOfWeek(rs.getString("days_of_week")))
+                        .dateOfStart(Main.convertStringToLocalDate(rs.getString("date_of_start")))
+                        .dateOfEnd(Main.convertStringToLocalDate(rs.getString("date_of_end")))
+                        .daysOfWeek(Main.convertStringToArrayDayOfWeek(rs.getString("days_of_week")))
 //                    TODO
 //                    .tasks
                         .build();
@@ -97,8 +97,6 @@ public class CourseDAOImpl extends DatabaseConnector implements CourseDAO{
             return courses;
         }
     }
-
-
 }
 
 

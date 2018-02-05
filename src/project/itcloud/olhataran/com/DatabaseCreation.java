@@ -101,9 +101,10 @@ public class DatabaseCreation extends DatabaseConnector {
             userDAO.add(new User("user", "user", false));
             userDAO.add(new User("admin", "admin", true));
 
-            System.out.println(Converter.listToString(courseDAO.getAll()));
-            System.out.println(Converter.listToString(trainerDAO.getAll()));
-            System.out.println(Converter.listToString(studentDAO.getAll()));
+            System.out.println(Main.listToString(courseDAO.getAll()));
+            System.out.println(Main.listToString(trainerDAO.getAll()));
+            System.out.println(Main.listToString(studentDAO.getAll()));
+            System.out.println(courseDAO.getById(2));
         } catch (Exception e) {
 //            System.out.println("Sorry, can't continue.");
             e.printStackTrace();

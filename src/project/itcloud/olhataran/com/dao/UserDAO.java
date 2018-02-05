@@ -7,5 +7,7 @@ import java.sql.SQLException;
 public interface UserDAO {
     boolean add(User user) throws SQLException;
 
+    User getByLogin(String login) throws SQLException;
+
 //    boolean remove(User user);
 }

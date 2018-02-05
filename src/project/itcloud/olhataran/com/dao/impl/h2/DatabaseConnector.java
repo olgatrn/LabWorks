@@ -107,6 +107,9 @@ public class DatabaseConnector {
     protected static final String SELECT_TRAINER_BY_ID =
             "SELECT * FROM trainer WHERE trainer.id = ?";
 
+    protected static final String SELECT_USER_BY_LOGIN =
+            "SELECT * FROM user WHERE user.login = ?";
+
     protected static final String SELECT_TRAINER_BY_NAME =
             "SELECT * FROM trainer " +
                     "WHERE trainer.first_name = ? AND trainer.last_name = ?";

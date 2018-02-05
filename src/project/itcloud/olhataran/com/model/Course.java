@@ -212,8 +212,7 @@ public class Course {
                 ",\ndate of start: " + dateOfStart +
                 ",\ndate of end: " + dateOfEnd +
                 ",\ndays of week: " + Arrays.toString(daysOfWeek) +
-                ",\ntrainer: " + (trainer != null? trainer.getFirstName() + " " + trainer.getLastName() : trainer) +
-                "\n\n";
+                ",\ntrainer: " + trainer + "\n\n";
     }
 }
 
