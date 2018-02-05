@@ -1,97 +1,104 @@
 package project.itcloud.olhataran.com.dao.impl.h2;
 
+import project.itcloud.olhataran.com.Converter;
 import project.itcloud.olhataran.com.dao.CourseDAO;
 import project.itcloud.olhataran.com.model.Course;
+import project.itcloud.olhataran.com.model.Trainer;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDAOImpl extends DatabaseConnector implements CourseDAO {
+public class CourseDAOImpl extends DatabaseConnector implements CourseDAO{
 
     public CourseDAOImpl() throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
     }
 
     @Override
-    public boolean addCourse(Course course) {
-        PreparedStatement ps = null;
-        try {
-            ps = getConnection().prepareStatement(INSERT_COURSE);
+    public boolean add(Course course) throws SQLException {
+        boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(INSERT_COURSE)) {
             ps.setInt(1, course.getId());
             ps.setString(2, course.getName());
             ps.setString(3, course.getShortDescription());
-            ps.setInt(4, course.getTrainer().getId());
-            ps.setString(5, course.getDateOfStart().format(DateTimeFormatter.ISO_DATE));
-            ps.setString(6, course.getDateOfEnd().format(DateTimeFormatter.ISO_DATE));
-            return ps.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            ps.setInt(4, course.getTrainer() != null ? course.getTrainer().getId() : 0);
+            ps.setString(5, course.getDateOfStart() != null ?
+                    course.getDateOfStart().format(DateTimeFormatter.ISO_LOCAL_DATE) : null);
+            ps.setString(6, course.getDateOfEnd() != null ?
+                    course.getDateOfEnd().format(DateTimeFormatter.ISO_LOCAL_DATE) : null);
+            ps.setString(7, course.getDaysOfWeek() != null ?
+                    Converter.convertArrayDayOfWeekToString(course.getDaysOfWeek()) : null);
+            ps.setString(8, Converter.convertListTasksToString(course.getTasks()));
+            result = ps.execute();
         }
-    }
-
-    @Override
-    public Student getStudentById(int id) {
-        Student student = null;
-        PreparedStatement ps = null;
-        try {
-            ps = getConnection().prepareStatement(SELECT_STUDENT_BY_ID);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                student = new Student.StudentBuilder(rs.getString("first_name"),
-                        rs.getString("last_name")).age(rs.getInt("age")).build();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        // TODO
-        // addition of the list of courses
-
-        return student;
-    }
-
-    public List<Person> getAll() {
-        List<Person> result = new ArrayList();
-        Statement st = null;
-
-        try {
-            st = this.getConnection().createStatement();
-            st.execute("SELECT * FROM person");
-            ResultSet resultSet = st.getResultSet();
-
-            while(resultSet.next()) {
-                Person person = new Person(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getInt("age"));
-                result.add(person);
-            }
-        } catch (SQLException var13) {
-            var13.printStackTrace();
-        } finally {
-            try {
-                st.close();
-            } catch (SQLException var12) {
-                var12.printStackTrace();
-                return null;
-            }
-        }
-
         return result;
     }
 
+    @Override
+    public Course getById(int id) throws SQLException {
+        Course course = null;
+        Trainer trainer = null;
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(SELECT_COURSE_BY_ID)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    if (rs.getInt("trainer_id") != 0) {
+                        trainer = new Trainer.TrainerBuilder(rs.getInt("trainer_id"),
+                                rs.getString("first_name"),
+                                rs.getString("last_name"))
+                                .build();
+                    }
+                    course = new Course.CourseBuilder(rs.getInt("id"),
+                            rs.getString("name"))
+                            .shortDescription(rs.getString("short_description"))
+                            .trainer(trainer)
+                            .dateOfStart(Converter.convertStringToLocalDate(rs.getString("date_of_start")))
+                            .dateOfEnd(Converter.convertStringToLocalDate(rs.getString("date_of_end")))
+                            .daysOfWeek(Converter.convertStringToArrayDayOfWeek(rs.getString("days_of_week")))
+//                      TODO
+//                    .tasks
+                            .build();
+                }
+                return course;
+            }
+        }
+    }
+
+    public List<Course> getAll() throws SQLException {
+        List<Course> courses = new ArrayList();
+        Trainer trainer;
+        try (Connection connection = getConnection();
+             Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(SELECT_ALL_COURSES)) {
+            while (rs.next()) {
+                if (rs.getInt("trainer_id") != 0) {
+                    trainer = new Trainer.TrainerBuilder(rs.getInt("trainer_id"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"))
+                            .build();
+                } else {
+                    trainer = null;
+                }
+                Course course = new Course.CourseBuilder(rs.getInt("id"),
+                        rs.getString("name"))
+                        .shortDescription(rs.getString("short_description"))
+                        .trainer(trainer)
+                        .dateOfStart(Converter.convertStringToLocalDate(rs.getString("date_of_start")))
+                        .dateOfEnd(Converter.convertStringToLocalDate(rs.getString("date_of_end")))
+                        .daysOfWeek(Converter.convertStringToArrayDayOfWeek(rs.getString("days_of_week")))
+//                    TODO
+//                    .tasks
+                        .build();
+                courses.add(course);
+            }
+            return courses;
+        }
+    }
+
+
 }
+
+

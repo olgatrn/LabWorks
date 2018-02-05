@@ -2,12 +2,19 @@ package project.itcloud.olhataran.com.dao;
 
 import project.itcloud.olhataran.com.model.Course;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CourseDAO {
-    boolean addCourse(Course course);
+    boolean add(Course course) throws SQLException;
 
-    Course getCourseById(int id);
+    //TODO
+    //boolean deleteById(int id) throws SQLException;
 
-    List<Course> getAll();
+    Course getById(int id) throws SQLException;
+
+    List<Course> getAll() throws SQLException;
+
+    //TODO
+    //boolean updateById(int id) throws SQLException;
 }

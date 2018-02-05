@@ -1,9 +1,12 @@
 package project.itcloud.olhataran.com;
 
-import project.itcloud.olhataran.com.model.Student;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        Student student = new Student.StudentBuilder("Olha", "Taran").build();
+//        System.out.println(Converter.convertArrayDayOfWeekToString(new DayOfWeek[]{}));
+        System.out.println(Converter.convertStringToLocalDate("2019-07-12"));
+        System.out.println(Arrays.toString(Converter.convertStringToArrayDayOfWeek("MONDAY, TUESDAY")));
+
     }
 }

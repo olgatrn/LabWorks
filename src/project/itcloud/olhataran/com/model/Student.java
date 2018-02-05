@@ -1,5 +1,6 @@
 package project.itcloud.olhataran.com.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
@@ -8,8 +9,8 @@ public class Student {
         private final int id;
         private final String firstName;
         private final String lastName;
-        private int age;
-        private List<Course> courses;
+        private int age = 0;
+        private List<Course> courses = new ArrayList<>();
 
         public StudentBuilder(String firstName, String lastName) {
             this.id = counter++;
@@ -17,13 +18,23 @@ public class Student {
             this.lastName = lastName;
         }
 
+        public StudentBuilder(int id, String firstName, String lastName) {
+            this.id = id;
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
         public StudentBuilder age(int age) {
-            this.age = age;
+            if (this.age == 0) {
+                this.age = age;
+            }
             return this;
         }
 
         public StudentBuilder courses(List<Course> courses) {
-            this.courses = courses;
+            if (this.courses.isEmpty()) {
+                this.courses = courses;
+            }
             return this;
         }
 
@@ -36,8 +47,8 @@ public class Student {
     private final int id;
     private final String firstName;
     private final String lastName;
-    private int age;
-    private List<Course> courses;
+    private int age = 0;
+    private List<Course> courses = new ArrayList<>();
 
     public Student(StudentBuilder builder) {
         this.id = builder.id;
@@ -45,6 +56,11 @@ public class Student {
         this.lastName = builder.lastName;
         this.age = builder.age;
         this.courses = builder.courses;
+    }
+
+    public boolean addCourse(Course course) {
+        courses.add(course);
+        return true;
     }
 
     public int getId() {
@@ -67,14 +83,18 @@ public class Student {
         return courses;
     }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", courses=" + courses +
-                '}';
+        return "Student - " + firstName + " " + lastName +
+                "\nid: " + id +
+                ",\nage: " + age + "\n\n";
     }
 }
